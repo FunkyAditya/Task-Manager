@@ -4,7 +4,6 @@ import "./App.css";
 
 const TASK_API_URL = "http://localhost:5000/tasks";
 
-// Helper: map our backend statuses to filter keys used in the design
 const mapStatusToFilter = (status) => {
   if (status === "To Do") return "not-started";
   if (status === "In Progress") return "in-progress";
@@ -13,17 +12,14 @@ const mapStatusToFilter = (status) => {
 };
 
 const App = () => {
-  // Task manager state
   const [tasks, setTasks] = useState([]);
   const [newTask, setNewTask] = useState("");
   const [editTaskId, setEditTaskId] = useState(null);
   const [editText, setEditText] = useState("");
 
-  // UI state for filtering and theme
   const [filter, setFilter] = useState("all");
-  const [theme, setTheme] = useState("dark"); // "dark" or "light"
+  const [theme, setTheme] = useState("dark"); 
 
-  // For drag and drop reordering
   const dragItem = useRef(null);
 
   useEffect(() => {
@@ -91,7 +87,6 @@ const App = () => {
     }
   };
 
-  // Drag and drop handlers for rearranging tasks
   const handleDragStart = (e, index) => {
     dragItem.current = index;
   };
@@ -109,12 +104,10 @@ const App = () => {
     updatedTasks.splice(dropIndex, 0, removed);
     dragItem.current = null;
     setTasks(updatedTasks);
-    // Persist new order to backend
     axios.put(`${TASK_API_URL}/reorder`, { tasks: updatedTasks })
       .catch((error) => console.error("Failed to reorder tasks:", error));
   };
 
-  // Filter tasks based on the current filter state
   const filteredTasks = tasks.filter((task) => {
     if (filter === "all") return true;
     return mapStatusToFilter(task.status) === filter;
@@ -175,7 +168,7 @@ const App = () => {
           </nav>
         </aside>
 
-        <main className="task-board">
+        <main className="task-board ">
           <header>
             <h1>Task Board</h1>
             <i className="fas fa-adjust theme-toggle" onClick={toggleTheme}></i>

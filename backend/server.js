@@ -10,25 +10,23 @@ app.use(cors());
 const FILE_PATH = "tasks.txt";
 let tasks = [];
 
-// Load tasks from file on startup
+
 const loadTasks = async () => {
   try {
     const data = await fs.readFile(FILE_PATH, "utf-8");
     tasks = JSON.parse(data);
   } catch (error) {
-    tasks = []; // If file doesn't exist or is empty, initialize as empty array
+    tasks = []; 
   }
 };
 
-// Save tasks to file
+
 const saveTasks = async () => {
   await fs.writeFile(FILE_PATH, JSON.stringify(tasks, null, 2));
 };
 
-// Initialize tasks on server start
 loadTasks();
 
-// Add Task (Stores Created Time)
 app.post("/tasks", async (req, res) => {
   const { text } = req.body;
   const id = Date.now().toString();
@@ -40,12 +38,10 @@ app.post("/tasks", async (req, res) => {
   res.json(newTask);
 });
 
-// Get All Tasks
 app.get("/tasks", (req, res) => {
   res.json(tasks);
 });
 
-// Toggle Task Status + Track Completion Time
 app.put("/tasks/toggle/:id", async (req, res) => {
   const { status } = req.body;
   const task = tasks.find((t) => t.id === req.params.id);
@@ -59,7 +55,6 @@ app.put("/tasks/toggle/:id", async (req, res) => {
   res.json(task);
 });
 
-// Edit Task
 app.put("/tasks/edit/:id", async (req, res) => {
   const { text } = req.body;
   const task = tasks.find((t) => t.id === req.params.id);
@@ -71,7 +66,6 @@ app.put("/tasks/edit/:id", async (req, res) => {
   res.json(task);
 });
 
-// Delete Task
 app.delete("/tasks/:id", async (req, res) => {
   tasks = tasks.filter((t) => t.id !== req.params.id);
   await saveTasks();
@@ -92,5 +86,4 @@ app.put("/tasks/reorder", async (req, res) => {
     }
   });
 
-// Start Server
 app.listen(5000, () => console.log("Server running on port 5000"));
