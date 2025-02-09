@@ -45,3 +45,9 @@ Builds the app for production in the `build` folder. It bundles and optimizes Re
 #### `npm run eject`
 
 Removes the single build dependency and copies all configuration files for full control over the project setup. **This is irreversible.**
+
+## Workflow Chart
+
+![ec3c219e-a88a-4497-86ce-339a57ced1d8](https://github.com/user-attachments/assets/97e39ed0-f578-4738-a72d-27ab253d6d7f)
+
+
