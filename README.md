@@ -45,10 +45,3 @@ Builds the app for production in the `build` folder. It bundles and optimizes Re
 #### `npm run eject`
 
 Removes the single build dependency and copies all configuration files for full control over the project setup. **This is irreversible.**
-
-## Learn More
-
-To learn more about React, check out the [React documentation](https://reactjs.org/).
-
-For additional Create React App features, refer to the [official guide](https://facebook.github.io/create-react-app/docs/getting-started).
-
